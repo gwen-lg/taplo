@@ -36,9 +36,9 @@ runs:
       run: $GITHUB_ACTION_PATH/action/install.sh
 
     - name: Format with Taplo
+      if: ${{ inputs.format == 'true' }} # TODO: why it doesn't work for disable the step?
       id: format
       shell: bash
-      if: ${{ inputs.format }}
       run: |
         if ! ${{ inputs.format_write_changes }}; then
             ARGS=" --check --diff"
@@ -46,9 +46,9 @@ runs:
         ${taplo_cmd} format ${ARGS}
 
     - name: Lint with Taplo
+      if: ${{ inputs.lint == 'true' }} # TODO: why it doesn't work for disable the step?
       id: lint
       shell: bash
-      if: ${{ inputs.lint }}
       run: ${taplo_cmd} lint
 
 branding:
